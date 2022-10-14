@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import com.cp.demo.contoller.DemoController;
+import com.cp.demo.entity.Consumer;
 import com.cp.demo.entity.Department;
 import com.cp.demo.exception.CPException;
+import com.cp.demo.service.ConsumerService;
 import com.cp.demo.service.DepartmentService;
+import com.cp.demo.serviceimpl.ConsumerServiceImpl;
 import com.cp.demo.serviceimpl.DepartmentServiceImpl;
 import com.cp.inv.util.DBManager;
 
@@ -64,6 +67,39 @@ public class MainMenu {
 				
 				break;
 			case 2:
+				int consId=0;
+				int deptId = 0;
+				ConsumerService consumerService=new ConsumerServiceImpl();
+				
+				System.out.println("Enter the Consumer Name");
+				String consName=sc1.next();
+				
+				System.out.println("Enter the Consumer Number");
+				int consNumber=sc1.nextInt();
+				
+				System.out.println("Enter the Consumer Address1");
+				String consAddress1=sc1.next();
+				
+				System.out.println("Enter the Consumer Address2");
+				String consAddress2=sc1.next();
+				System.out.println("Enter the Consumer city");
+				String consCity=sc1.next();
+				System.out.println("Enter the Consumer phone");
+				int consPhone=sc1.nextInt();
+				
+				Department dept=null;
+				for(String deptName:DepartmentCache.keySet()) {
+					dept=DepartmentCache.get(deptName);
+					deptId=DepartmentCache.get(deptName).getDeptId();
+					System.out.println(deptId);
+					
+				}
+				
+				Consumer consumer=new Consumer(consName,consNumber,consAddress1,consAddress2,consCity,consPhone,deptId);
+				consId = consumerService.createConsumer(consumer);
+				consumer.setConsId(consId);
+				
+				consumerService.getAllConsumer();
 				
 				break;
 				

@@ -42,6 +42,7 @@ public class DepartmentServiceImpl  implements DepartmentService{
 			 DepartmentCache.put(dp.getDeptName(),dp);
 			 
 		 }
+		 System.out.println(DepartmentCache);
 		return DepartmentCache ;
 	}
 
