@@ -25,9 +25,7 @@ public class DemoController {
 			rs = st.executeQuery("SELECT count(*) FROM information_schema.tables WHERE table_schema = 'public';");
 			if (rs.next())
 				System.out.println(rs.getInt(1));
-		} catch (CPException exp) {
-			exp.printStackTrace();
-		} catch (Exception exp1) {
+		}  catch (Exception exp1) {
 			exp1.printStackTrace();
 		} finally {
 			dbm.closeConnection(con);

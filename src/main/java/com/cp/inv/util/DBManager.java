@@ -84,9 +84,14 @@ public class DBManager {
 	 * @return DBManager
 	 * @throws CPException
 	 */
-	public static DBManager getDBManager() throws CPException {
+	public static DBManager getDBManager()  {
 		if (null == dbManager) {
-			dbManager = new DBManager();
+			try {
+				dbManager = new DBManager();
+			} catch (CPException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return dbManager;
 	}
@@ -102,12 +107,12 @@ public class DBManager {
 				}
 			} catch (Exception exp) {
 				exp.printStackTrace();
-				throw new CPException("003", mb.getMessage("003") + exp.getMessage());
+
 			}
 		} else {
-			throw new CPException("001", mb.getMessage("001"));
+			// throw new CPException("001", mb.getMessage("001"));
 		}
-		printConSize();
+		// printConSize();
 		return con;
 	}
 
