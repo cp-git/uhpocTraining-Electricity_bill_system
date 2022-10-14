@@ -3,4 +3,14 @@
   <groupId>com.cp.demo</groupId>
   <artifactId>Electric_Bill</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+  <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.5.0</version>
+</dependency>
+
+  </dependencies>
 </project>
