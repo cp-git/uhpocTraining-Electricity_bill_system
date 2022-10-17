@@ -1,35 +1,49 @@
 package com.cp.demo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import com.cp.demo.contoller.DemoController;
 import com.cp.demo.entity.Consumer;
 import com.cp.demo.entity.Department;
+import com.cp.demo.entity.Power;
 import com.cp.demo.exception.CPException;
 import com.cp.demo.service.ConsumerService;
 import com.cp.demo.service.DepartmentService;
+import com.cp.demo.service.PowerService;
 import com.cp.demo.serviceimpl.ConsumerServiceImpl;
 import com.cp.demo.serviceimpl.DepartmentServiceImpl;
+import com.cp.demo.serviceimpl.PowerServiceImpl;
 import com.cp.inv.util.DBManager;
 
 public class MainMenu {
-	
-	private static HashMap<String,Department> DepartmentCache=new HashMap<String,Department>();
+
+	private static HashMap<String, Department> DepartmentCache = new HashMap<String, Department>();
+	private static HashMap<Integer, Consumer> ConsumerCache = new HashMap<>();
+	private static HashMap<Integer, Power> billCache = new HashMap<>();
 
 	public MainMenu() {
 //		initCache();
 	}
-	
+
 	private static void loadCache() {
-		DepartmentService deptService=new DepartmentServiceImpl();
-		DepartmentCache=deptService.display();
+		DepartmentService deptService = new DepartmentServiceImpl();
+		DepartmentCache = deptService.display();
+
+		ConsumerService consumerService = new ConsumerServiceImpl();
+		ConsumerCache = consumerService.display();
 		
+		PowerService pwService=new PowerServiceImpl();
+		billCache=pwService.display();
+		System.out.println(billCache);
+
 	}
 
-	public static void main(String[] args) throws CPException {
-		
-		if((DepartmentCache !=null || DepartmentCache.size()==0)){
+	public static void main(String[] args) throws CPException, ParseException {
+
+		if ((DepartmentCache != null || DepartmentCache.size() == 0) ||(ConsumerCache!=null || ConsumerCache.size()==0)||(billCache!=null || billCache.size()==0)) {
 			loadCache();
 		}
 
@@ -43,68 +57,135 @@ public class MainMenu {
 			int option = sc1.nextInt();
 			switch (option) {
 			case 1:
-				DepartmentService deptService=new DepartmentServiceImpl();
-				if(DepartmentCache.isEmpty() || DepartmentCache.size()==0) {
-				System.out.println("Enter the Department Name");
-				String deptName=sc1.next();
-				System.out.println("Enter the Department City");
-				String deptCity=sc1.next();
-				System.out.println("Enter the Department State");
-				String deptState=sc1.next();
-				
-				Department department=new Department(deptName,deptCity,deptState);
-				int deptId=deptService.createDepartment(department);
-				department.setDeptId(deptId);
-				
-				deptService.getAllDepartment();
-				DepartmentCache.put(department.getDeptName(), department);
-				}
-				else {
+				DepartmentService deptService = new DepartmentServiceImpl();
+				if (DepartmentCache.isEmpty() || DepartmentCache.size() == 0) {
+					System.out.println("Enter the Department Name");
+					String deptName = sc1.next();
+					System.out.println("Enter the Department City");
+					String deptCity = sc1.next();
+					System.out.println("Enter the Department State");
+					String deptState = sc1.next();
+
+					Department department = new Department(deptName, deptCity, deptState);
+					int deptId = deptService.createDepartment(department);
+					department.setDeptId(deptId);
+
+					deptService.getAllDepartment();
+					DepartmentCache.put(department.getDeptName(), department);
+				} else {
 					System.out.println("Data is already exists..");
 				}
-				
-				
-				
+
 				break;
 			case 2:
-				int consId=0;
+				int consId = 0;
 				int deptId = 0;
-				ConsumerService consumerService=new ConsumerServiceImpl();
+				ConsumerService consumerService = new ConsumerServiceImpl();
+				while (true) {
+					try {
+						System.out.println("Enter the Consumer Name");
+						String consName = sc1.next();
+
+						System.out.println("Enter the Consumer Number");
+						int consNumber = sc1.nextInt();
+
+						System.out.println("Enter the Consumer Address1");
+						String consAddress1 = sc1.next();
+
+						System.out.println("Enter the Consumer Address2");
+						String consAddress2 = sc1.next();
+						System.out.println("Enter the Consumer city");
+						String consCity = sc1.next();
+						System.out.println("Enter the Consumer phone");
+						int consPhone = sc1.nextInt();
+
+						if (ConsumerCache.containsKey(consNumber)) {
+							System.out.println("Consumer number already exist..");
+						}
+
+						else {
+							Department dept = null;
+							for (String deptName : DepartmentCache.keySet()) {
+								dept = DepartmentCache.get(deptName);
+								deptId = DepartmentCache.get(deptName).getDeptId();
+								System.out.println(deptId);
+
+							}
+
+							Consumer consumer = new Consumer(consName, consNumber, consAddress1, consAddress2, consCity,
+									consPhone, deptId);
+							consId = consumerService.createConsumer(consumer);
+							consumer.setConsId(consId);
+							ConsumerCache.put(consNumber, consumer);
+							System.out.println("Consumer is Successfully inserted....");
+
+						}
+
+					} catch (Exception ee) {
+						ee.printStackTrace();
+						break;
+					}
+
+					System.out.println("Do you want to add anothr consumer Yes[Y] or No[N]?\n press any for main menu");
+					String ch = sc1.next();
+					sc1.nextLine();
+					if (ch.equals("Y") || ch.equals("y")) {
+						continue;
+					} else {
+						break;
+					}
+
+				} // while loop
+
+				break;
+
+			case 3:
+				PowerService powerService=new PowerServiceImpl();
 				
-				System.out.println("Enter the Consumer Name");
-				String consName=sc1.next();
-				
+			consId=0;
 				System.out.println("Enter the Consumer Number");
 				int consNumber=sc1.nextInt();
 				
-				System.out.println("Enter the Consumer Address1");
-				String consAddress1=sc1.next();
-				
-				System.out.println("Enter the Consumer Address2");
-				String consAddress2=sc1.next();
-				System.out.println("Enter the Consumer city");
-				String consCity=sc1.next();
-				System.out.println("Enter the Consumer phone");
-				int consPhone=sc1.nextInt();
-				
-				Department dept=null;
-				for(String deptName:DepartmentCache.keySet()) {
-					dept=DepartmentCache.get(deptName);
-					deptId=DepartmentCache.get(deptName).getDeptId();
-					System.out.println(deptId);
+				if(ConsumerCache.containsKey(consNumber))
+				{
+					System.out.println("Already Exist...");
+					consId=ConsumerCache.get(consNumber).getConsId();
+					System.out.println(consId);
 					
 				}
+				System.out.println("Enter the Date:");
+				String readingDate=sc1.next();
+				  SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");
+				  Date date1=formatter1.parse(readingDate);
 				
-				Consumer consumer=new Consumer(consName,consNumber,consAddress1,consAddress2,consCity,consPhone,deptId);
-				consId = consumerService.createConsumer(consumer);
-				consumer.setConsId(consId);
+				System.out.println("Enter the CMR");
+				int powerCmr=sc1.nextInt();
 				
-				consumerService.getAllConsumer();
+				System.out.println("Enter the Reader Name");
+				String readerName=sc1.next();
 				
-				break;
+				Power power=new Power(readingDate,powerCmr,readerName,consId);
+				int billId=powerService.createBill(power);
+				power.setBillId(billId);
+				billCache.put(power.getBillId(), power);
 				
-
-			case 3:
+				
+				
+				
+				
+				Department dept = null;
+				for (String deptName : DepartmentCache.keySet()) {
+					dept = DepartmentCache.get(deptName);
+					deptId = DepartmentCache.get(deptName).getDeptId();
+					System.out.println(deptId);
+				}
+				//printing the Department Details
+				System.out.println("Department ID"+dept.getDeptId()+
+						"\n Department Name:"+dept.getDeptName()+
+						"\n Department City"+dept.getDeptCity()+
+						"\n Department State"+dept.getDeptState());
+				
+				
 				break;
 			case 4:
 				DBManager dbm = DBManager.getDBManager();

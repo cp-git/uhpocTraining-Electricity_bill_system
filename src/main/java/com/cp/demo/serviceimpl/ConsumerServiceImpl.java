@@ -8,7 +8,7 @@ import com.cp.demo.repository.ConsumerRepository;
 import com.cp.demo.service.ConsumerService;
 
 public class ConsumerServiceImpl implements ConsumerService {
-	HashMap<String,Consumer> ConsumerCache=new HashMap<>();
+	HashMap<Integer,Consumer> ConsumerCache=new HashMap<Integer,Consumer>();
 
 	ConsumerRepository consumerRepository=new ConsumerRepository();
 	@Override
@@ -33,15 +33,20 @@ public class ConsumerServiceImpl implements ConsumerService {
 	
 	
 	@Override
-	public HashMap<String, Consumer> display() {
+	public HashMap<Integer, Consumer> display() {
 		// TODO Auto-generated method stub
 		for(Consumer cons:consumerRepository.getDetailsConsumer()) {
-			ConsumerCache.put(cons.getConsName(), cons);
+			ConsumerCache.put(cons.getConsNumber(), cons);
 			
 		}
 		System.out.println(ConsumerCache);
 		return ConsumerCache;
 		
+	}
+	@Override
+	public Consumer getProductById(int consId) {
+		// TODO Auto-generated method stub
+		return consumerRepository.getConsumerById(consId);
 	}
 
 	

@@ -42,16 +42,7 @@ public class Consumer {
 
 	
 
-	/*public Consumer(int consId2, String consName2, int consNumber2, String consAddress12, String consAddress22,
-			String consCity2, int deptId2) {
-		// TODO Auto-generated constructor stub
-	}*/
-
-
-
 	
-
-
 
 	public int getConsId() {
 		return consId;

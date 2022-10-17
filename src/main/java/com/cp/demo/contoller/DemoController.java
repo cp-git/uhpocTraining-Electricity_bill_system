@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.cp.demo.exception.CPException;
 import com.cp.inv.util.DBManager;
 
 public class DemoController {

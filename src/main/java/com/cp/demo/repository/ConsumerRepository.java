@@ -12,9 +12,10 @@ import com.cp.demo.entity.Consumer;
 import com.cp.demo.exception.CPException;
 import com.cp.inv.util.DBManager;
 
+
 public class ConsumerRepository {
 	
-	Connection con;
+	Connection con=null;
 	PreparedStatement psmt=null;
 	DBManager dbManager=DBManager.getDBManager();
 	Statement stmt=null;
@@ -67,6 +68,9 @@ public class ConsumerRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+			dbManager.closeConnection(con);
+		}
 		
 		
 		return consId;
@@ -104,12 +108,52 @@ public class ConsumerRepository {
 		catch(Exception e){
 			e.printStackTrace();
 			
+		}finally {
+			dbManager.closeConnection(con);
+			
 		}
 		
 		
 		
 		return mycons;
 		
+	}
+	
+	public Consumer getConsumerById(int consId) {
+
+		String getQuery = "SELECT * FROM consumer where cons_id = ?";
+		Consumer consumer=null;
+	
+		try {
+			con = dbManager.getConnection();
+			psmt = con.prepareStatement(getQuery);
+			psmt.setInt(1, consId);
+			 rsobj = psmt.executeQuery();
+
+			while (rsobj.next()) {
+				String consName=rsobj.getString("cons_name");
+				int consNumber=rsobj.getInt("cons_number");
+				String consAddress1=rsobj.getString("cons_address1");
+				String consAddress2=rsobj.getString("cons_address2");
+				String consCity=rsobj.getString("cons_city");
+				int deptId=rsobj.getInt("dept_id");
+				
+				 consumer=new Consumer(consId,consName,consNumber,consAddress1,consAddress2,consCity,deptId);
+				consumer.toString();
+			}
+		} catch (CPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbManager.closeConnection(con);
+		}
+		return consumer;
+
+		
+
 	}
 
 }

@@ -5,10 +5,13 @@ import java.util.List;
 
 import com.cp.demo.entity.Consumer;
 
+
 public interface ConsumerService {
 	
 	int createConsumer(Consumer consumer);
 	List<Consumer> getAllConsumer();
-	HashMap<String,Consumer> display();
+	HashMap<Integer, Consumer> display();
+	
+	public Consumer getProductById(int consId);
 
 }
