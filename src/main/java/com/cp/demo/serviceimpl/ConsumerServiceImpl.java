@@ -39,7 +39,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 			ConsumerCache.put(cons.getConsNumber(), cons);
 			
 		}
-		System.out.println(ConsumerCache);
+		//System.out.println(ConsumerCache);
 		return ConsumerCache;
 		
 	}

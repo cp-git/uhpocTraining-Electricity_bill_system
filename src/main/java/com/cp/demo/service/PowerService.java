@@ -15,6 +15,8 @@ public interface PowerService {
 	
 	public Power getPowerBillById(int billId);
 	
+	public List<Power> getBillGeneration(int consId);
+	
 	
 
 }

@@ -43,5 +43,11 @@ public class PowerServiceImpl implements PowerService {
 		// TODO Auto-generated method stub
 		return powerRepo.getConsumerById(billId);
 	}
+	@Override
+	public List<Power> getBillGeneration(int consId) {
+		// TODO Auto-generated method stub
+		List<Power> listProdList = powerRepo.getListPowerDetails(consId);
+		return listProdList;
+	}
 
 }

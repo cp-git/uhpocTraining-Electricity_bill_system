@@ -100,7 +100,7 @@ public class DepartmentRepository {
 				Department dt =new Department(deptId,deptName,deptCity,deptState);
 				depts.add(dt);
 			}
-			System.out.println(depts);
+			//System.out.println(depts);
 		}
 		catch(Exception e) {
 			

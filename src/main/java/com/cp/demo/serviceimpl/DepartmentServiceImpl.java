@@ -18,7 +18,7 @@ public class DepartmentServiceImpl  implements DepartmentService{
 		try {
 			System.out.println("In Service");
 			departmentRepository.insertDepartment(department);
-			System.out.println(deptId);
+			//System.out.println(deptId);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class DepartmentServiceImpl  implements DepartmentService{
 			 DepartmentCache.put(dp.getDeptName(),dp);
 			 
 		 }
-		 System.out.println(DepartmentCache);
+		// System.out.println(DepartmentCache);
 		return DepartmentCache ;
 	}
 

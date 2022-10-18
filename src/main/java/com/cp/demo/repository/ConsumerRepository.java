@@ -101,7 +101,7 @@ public class ConsumerRepository {
 				mycons.add(consumer);
 			}
 			
-			System.out.println(mycons);
+		//	System.out.println(mycons);
 			
 			
 		}

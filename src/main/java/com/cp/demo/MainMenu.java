@@ -2,8 +2,11 @@ package com.cp.demo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import com.cp.demo.entity.Consumer;
@@ -37,7 +40,7 @@ public class MainMenu {
 		
 		PowerService pwService=new PowerServiceImpl();
 		billCache=pwService.display();
-		System.out.println(billCache);
+	//	System.out.println(billCache);
 
 	}
 
@@ -143,8 +146,13 @@ public class MainMenu {
 				PowerService powerService=new PowerServiceImpl();
 				
 			consId=0;
+			int consNumber=0;
+			List<Power> listInvProd = null;
+			while(true) {
+				
+				try {
 				System.out.println("Enter the Consumer Number");
-				int consNumber=sc1.nextInt();
+				 consNumber=sc1.nextInt();
 				
 				if(ConsumerCache.containsKey(consNumber))
 				{
@@ -171,9 +179,20 @@ public class MainMenu {
 				
 				
 				
+				   Calendar cal = Calendar.getInstance();  
+			        try{  
+			           cal.setTime(formatter1.parse(readingDate));  
+			        }catch(ParseException e){  
+			            e.printStackTrace();  
+			         }  
+			        
+			        cal.add(Calendar.DAY_OF_MONTH, 30);  
+			        String dateAfter = formatter1.format(cal.getTime());  
+			        System.out.println(dateAfter+" is the date after adding 3 days.");  
 				
 				
-				Department dept = null;
+				
+				/*Department dept = null;
 				for (String deptName : DepartmentCache.keySet()) {
 					dept = DepartmentCache.get(deptName);
 					deptId = DepartmentCache.get(deptName).getDeptId();
@@ -185,6 +204,49 @@ public class MainMenu {
 						"\n Department City"+dept.getDeptCity()+
 						"\n Department State"+dept.getDeptState());
 				
+				System.out.println(ConsumerCache.get(consNumber));
+				//System.out.println(billCache.get(consId));*/
+				
+				
+				//Printing the data
+			 listInvProd = powerService.getBillGeneration(consId);
+				System.out.println(listInvProd);
+			}
+			catch(Exception tt) {
+				tt.printStackTrace();
+				break;
+			}
+				
+				System.out.println("Do you want to add anothr Bill Yes[Y] or No[N]?\n press any for main menu");
+				String ch1 = sc1.next();
+				sc1.nextLine();
+				if (ch1.equals("Y") || ch1.equals("y")) {
+					continue;
+				} else {
+					break;
+				}
+				
+				
+			}
+			
+			Department dept = null;
+			for (String deptName : DepartmentCache.keySet()) {
+				dept = DepartmentCache.get(deptName);
+				deptId = DepartmentCache.get(deptName).getDeptId();
+				//System.out.println(deptId);
+			}
+			//printing the Department Details
+			System.out.println("Department ID"+dept.getDeptId()+
+					"\n Department Name:"+dept.getDeptName()+
+					"\n Department City"+dept.getDeptCity()+
+					"\n Department State"+dept.getDeptState());
+			
+				
+				System.out.println(ConsumerCache.get(consNumber));
+				System.out.println(listInvProd);
+				
+			
+			
 				
 				break;
 			case 4:

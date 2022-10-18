@@ -97,7 +97,7 @@ public class PowerRepo {
 					Power pp=new Power(billId,readingDate,powerCmr,readerName,consId);
 					pw.add(pp);
 				}
-				System.out.println(pw);
+				//System.out.println(pw);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -133,6 +133,7 @@ public class PowerRepo {
 				 power=new Power(billId,readingDate,powerCmr,readerName,consId);
 				
 				 power.toString();
+				 System.out.println(power);
 			}
 		} catch (CPException e) {
 			// TODO Auto-generated catch block
@@ -144,6 +145,45 @@ public class PowerRepo {
 			dbManager.closeConnection(con);
 		}
 		return power;
+
+		
+
+	}
+	
+	public List<Power> getListPowerDetails(int consId) {
+		ArrayList<Power> pwarray=new ArrayList<>();
+		String getQuery = "SELECT * FROM power where cons_id = ?";
+		Power power=null;
+	
+		try {
+			con = dbManager.getConnection();
+			psmt = con.prepareStatement(getQuery);
+			psmt.setInt(1, consId);
+			 rsobj = psmt.executeQuery();
+
+			while (rsobj.next()) {
+				int billId=rsobj.getInt("p_id");
+				String readingDate=rsobj.getString("reader_date");
+				int powerCmr=rsobj.getInt("p_cmr");
+				String readerName=rsobj.getString("reader_name");
+				
+				
+				
+				 power=new Power(billId,readingDate,powerCmr,readerName,consId);
+				 pwarray.add(power);
+				
+		
+			}
+		} catch (CPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbManager.closeConnection(con);
+		}
+		return pwarray;
 
 		
 
