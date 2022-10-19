@@ -1,10 +1,10 @@
-package com.cp.demo.contoller;
+package com.cp.demo.testjdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import com.cp.inv.util.DBManager;
+import com.cp.demo.dbhelper.DBManager;
 
 public class DemoController {
 

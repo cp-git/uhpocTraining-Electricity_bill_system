@@ -1,4 +1,4 @@
-package com.cp.demo;
+package com.cp.demo.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import com.cp.demo.dbhelper.DBManager;
 import com.cp.demo.entity.Consumer;
 import com.cp.demo.entity.Department;
 import com.cp.demo.entity.Power;
@@ -19,7 +20,6 @@ import com.cp.demo.service.PowerService;
 import com.cp.demo.serviceimpl.ConsumerServiceImpl;
 import com.cp.demo.serviceimpl.DepartmentServiceImpl;
 import com.cp.demo.serviceimpl.PowerServiceImpl;
-import com.cp.inv.util.DBManager;
 
 public class MainMenu {
 
@@ -148,6 +148,10 @@ public class MainMenu {
 			consId=0;
 			int consNumber=0;
 			List<Power> listInvProd = null;
+			List<Consumer> listcons=null;
+			String dateAfter = null;
+			
+			Consumer consumer = null;
 			while(true) {
 				
 				try {
@@ -187,8 +191,9 @@ public class MainMenu {
 			         }  
 			        
 			        cal.add(Calendar.DAY_OF_MONTH, 30);  
-			        String dateAfter = formatter1.format(cal.getTime());  
+			         dateAfter = formatter1.format(cal.getTime());  
 			        System.out.println(dateAfter+" is the date after adding 3 days.");  
+			        
 				
 				
 				
@@ -211,6 +216,14 @@ public class MainMenu {
 				//Printing the data
 			 listInvProd = powerService.getBillGeneration(consId);
 				System.out.println(listInvProd);
+				
+			consumerService=new ConsumerServiceImpl();
+			
+			 consumer=consumerService.getProductById(consId);
+			
+			
+				
+				
 			}
 			catch(Exception tt) {
 				tt.printStackTrace();
@@ -236,15 +249,30 @@ public class MainMenu {
 				//System.out.println(deptId);
 			}
 			//printing the Department Details
-			System.out.println("Department ID"+dept.getDeptId()+
-					"\n Department Name:"+dept.getDeptName()+
-					"\n Department City"+dept.getDeptCity()+
-					"\n Department State"+dept.getDeptState());
+			System.out.println("                   "+dept.getDeptName());
+			System.out.println("\n                  "+dept.getDeptCity()+"\t -"+dept.getDeptState());
 			
 				
-				System.out.println(ConsumerCache.get(consNumber));
-				System.out.println(listInvProd);
+				//System.out.println(ConsumerCache.get(consNumber));
+				//System.out.println(listInvProd);
 				
+				System.out.println(consumer.getConsId());
+				System.out.println("Consumer Name        :"+consumer.getConsName());
+				System.out.println("Consumer Number      :"+consumer.getConsNumber());
+				System.out.println("Consumer Address1    :"+consumer.getConsAddress1());
+				System.out.println("Consumer Address     :"+consumer.getConsAddress2());
+				System.out.println("Consumer City        :"+consumer.getConsCity());
+				
+				
+				System.out.println("Bill_id \t Reading Date \t power cmr \t Reader Name ");
+				for(Power pp:listInvProd)
+				{
+					
+					System.out.println(pp.getBillId()+"               "+pp.getReadingDate()+"          "+pp.getPowerCmr()+"           "+pp.getReaderName());
+					//System.out.println(pp.getReadingDate());
+					//System.out.println(pp.getPowerCmr());
+					//System.out.println(pp.getReaderName());
+				}
 			
 			
 				

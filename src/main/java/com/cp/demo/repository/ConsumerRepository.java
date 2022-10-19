@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cp.demo.dbhelper.DBManager;
 import com.cp.demo.entity.Consumer;
 import com.cp.demo.exception.CPException;
-import com.cp.inv.util.DBManager;
 
 
 public class ConsumerRepository {

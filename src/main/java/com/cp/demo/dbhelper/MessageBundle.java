@@ -1,4 +1,4 @@
-package com.cp.inv.util;
+package com.cp.demo.dbhelper;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
