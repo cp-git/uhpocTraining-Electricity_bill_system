@@ -190,50 +190,6 @@ public class PowerRepo {
 	}
 	
 	
-	public List<Power> getCmrPowerDetails(String readerDate) {
-		ArrayList<Power> pwarray=new ArrayList<>();
-		String getQuery = "SELECT(t2.p_cmr - t1.p_cmr) AS sub1\r\n"
-				+ "FROM power t1 CROSS JOIN\r\n"
-				+ "     power t2\r\n"
-				+ "WHERE t1.reader_date=? AND t2.reader_date=?";
-		Power power=null;
-	
-		try {
-			con = dbManager.getConnection();
-			psmt = con.prepareStatement(getQuery);
-			psmt.setString(1, readerDate);
-			 rsobj = psmt.executeQuery();
-
-			while (rsobj.next()) {
-				int billId=rsobj.getInt("p_id");
-				String readingDate=rsobj.getString("reader_date");
-				int powerCmr=rsobj.getInt("p_cmr");
-				String readerName=rsobj.getString("reader_name");
-				int consId=rsobj.getInt("cons_id");
-				
-				
-				
-				 power=new Power(billId,readingDate,powerCmr,readerName,consId);
-				 pwarray.add(power);
-				
-		
-			}
-		} catch (CPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			dbManager.closeConnection(con);
-		}
-		return pwarray;
-
-		
-
-	}
-	
-	
 
 	
 	

@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.cp.demo.dbhelper.DBManager;
 import com.cp.demo.entity.Consumer;
@@ -65,7 +67,7 @@ public class MainMenu {
 				if (DepartmentCache.isEmpty() || DepartmentCache.size() == 0) {
 					System.out.println("Enter the Department Name");
 					String deptName = sc1.next();
-			
+					
 					System.out.println("Enter the Department City");
 					String deptCity = sc1.next();
 					
@@ -312,6 +314,7 @@ public class MainMenu {
 					
 				}
 				
+				
 			
 				
 				
@@ -340,8 +343,9 @@ public class MainMenu {
 				System.out.println("Please enter options between 1 to 4 ");
 				break;
 			}
+		
 		}
-
+			
 	}
 
 }

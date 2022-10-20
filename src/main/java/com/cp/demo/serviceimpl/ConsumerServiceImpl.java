@@ -16,7 +16,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 		// TODO Auto-generated method stub
 		int consId=0;
 		try {
-			consumerRepository.createConsumer(consumer);
+			consId=consumerRepository.createConsumer(consumer);
 			
 		}
 		catch(Exception e)

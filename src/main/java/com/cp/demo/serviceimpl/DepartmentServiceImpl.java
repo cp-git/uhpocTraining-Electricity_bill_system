@@ -17,7 +17,7 @@ public class DepartmentServiceImpl  implements DepartmentService{
 		int deptId=0;
 		try {
 			System.out.println("In Service");
-			departmentRepository.insertDepartment(department);
+			deptId=departmentRepository.insertDepartment(department);
 			//System.out.println(deptId);
 		}
 		catch(Exception e) {

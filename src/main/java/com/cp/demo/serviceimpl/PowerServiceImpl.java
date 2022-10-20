@@ -49,11 +49,7 @@ public class PowerServiceImpl implements PowerService {
 		List<Power> listProdList = powerRepo.getListPowerDetails(consId);
 		return listProdList;
 	}
-	@Override
-	public List<Power> getCmrDetails(String readerDate) {
-		// TODO Auto-generated method stub
-		return powerRepo.getCmrPowerDetails(readerDate);
-	}
+	
 	
 	
 
