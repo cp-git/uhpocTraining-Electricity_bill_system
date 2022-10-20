@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.cp.demo.dbhelper.DBManager;
@@ -64,10 +65,13 @@ public class MainMenu {
 				if (DepartmentCache.isEmpty() || DepartmentCache.size() == 0) {
 					System.out.println("Enter the Department Name");
 					String deptName = sc1.next();
+			
 					System.out.println("Enter the Department City");
 					String deptCity = sc1.next();
+					
 					System.out.println("Enter the Department State");
 					String deptState = sc1.next();
+					
 
 					Department department = new Department(deptName, deptCity, deptState);
 					int deptId = deptService.createDepartment(department);
@@ -88,9 +92,10 @@ public class MainMenu {
 					try {
 						System.out.println("Enter the Consumer Name");
 						String consName = sc1.next();
-
+						
 						System.out.println("Enter the Consumer Number");
 						int consNumber = sc1.nextInt();
+						
 
 						System.out.println("Enter the Consumer Address1");
 						String consAddress1 = sc1.next();
@@ -148,10 +153,15 @@ public class MainMenu {
 			consId=0;
 			int consNumber=0;
 			List<Power> listInvProd = null;
-			List<Consumer> listcons=null;
+			List<Power> listPower=null;
 			String dateAfter = null;
-			
+			SimpleDateFormat formatter1 = null;
 			Consumer consumer = null;
+			 Calendar cal = null;
+			 
+				Map<String,List<String>> map = null;
+				 List<String> list = null;
+			
 			while(true) {
 				
 				try {
@@ -167,7 +177,7 @@ public class MainMenu {
 				}
 				System.out.println("Enter the Date:");
 				String readingDate=sc1.next();
-				  SimpleDateFormat formatter1=new SimpleDateFormat("dd/MM/yyyy");
+				   formatter1=new SimpleDateFormat("dd/MM/yyyy");
 				  Date date1=formatter1.parse(readingDate);
 				
 				System.out.println("Enter the CMR");
@@ -183,7 +193,7 @@ public class MainMenu {
 				
 				
 				
-				   Calendar cal = Calendar.getInstance();  
+				    cal = Calendar.getInstance();  
 			        try{  
 			           cal.setTime(formatter1.parse(readingDate));  
 			        }catch(ParseException e){  
@@ -191,11 +201,16 @@ public class MainMenu {
 			         }  
 			        
 			        cal.add(Calendar.DAY_OF_MONTH, 30);  
-			         dateAfter = formatter1.format(cal.getTime());  
-			        System.out.println(dateAfter+" is the date after adding 3 days.");  
+			        dateAfter = formatter1.format(cal.getTime());  
+			        //System.out.println(dateAfter+" is the date after adding 30 days.");  
 			        
+			       
+			       
+			       
+			        
+
 				
-				
+			        
 				
 				/*Department dept = null;
 				for (String deptName : DepartmentCache.keySet()) {
@@ -215,11 +230,16 @@ public class MainMenu {
 				
 				//Printing the data
 			 listInvProd = powerService.getBillGeneration(consId);
-				System.out.println(listInvProd);
+				//System.out.println(listInvProd);
 				
 			consumerService=new ConsumerServiceImpl();
 			
 			 consumer=consumerService.getProductById(consId);
+			 
+			 
+			 
+			 
+			 
 			
 			
 				
@@ -264,17 +284,50 @@ public class MainMenu {
 				System.out.println("Consumer City        :"+consumer.getConsCity());
 				
 				
-				System.out.println("Bill_id \t Reading Date \t power cmr \t Reader Name ");
+				
+				System.out.println("Reading Date \t power cmr \t Reader Name \t Due Date");
 				for(Power pp:listInvProd)
 				{
 					
-					System.out.println(pp.getBillId()+"               "+pp.getReadingDate()+"          "+pp.getPowerCmr()+"           "+pp.getReaderName());
-					//System.out.println(pp.getReadingDate());
-					//System.out.println(pp.getPowerCmr());
-					//System.out.println(pp.getReaderName());
+
+					try{  
+				           cal.setTime(formatter1.parse(pp.getReadingDate()));  
+				        }catch(ParseException e){  
+				            e.printStackTrace();  
+				         }  
+				        
+				        cal.add(Calendar.DAY_OF_MONTH, 31);  
+				        dateAfter = formatter1.format(cal.getTime());  
+					
+					
+					
+					System.out.println(pp.getReadingDate()+"          "+pp.getPowerCmr()+"           "+pp.getReaderName()+"          "+dateAfter);
+				
+					
+					//System.out.println(dateAfter);
+					
+					
+					
+				
+					
 				}
+				
 			
+				
+				
+				
 			
+				
+				//System.out.println(listPower.);
+				
+				
+				
+			
+				
+				
+				
+				
+		
 				
 				break;
 			case 4:

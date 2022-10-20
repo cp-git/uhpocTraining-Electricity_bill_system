@@ -17,6 +17,10 @@ public interface PowerService {
 	
 	public List<Power> getBillGeneration(int consId);
 	
+	public List<Power> getCmrDetails(String readerDate);
+	
+	
+	
 	
 
 }

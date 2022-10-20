@@ -17,6 +17,13 @@ public class Power {
 	
 	
 	
+	
+	
+
+
+
+
+
 
 	public Power(int billId, String readingDate, int powerCmr, String readerName, int consId) {
 		super();
@@ -40,6 +47,24 @@ public class Power {
 
 	
 	
+	
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
 
 	public int getBillId() {
 		return billId;
@@ -86,6 +111,18 @@ public class Power {
 		return "Power [billId=" + billId + ", readingDate=" + readingDate + ", powerCmr=" + powerCmr + ", readerName="
 				+ readerName + ", consId=" + consId + "]";
 	}
+
+
+
+
+
+
+
+
+
+
+
+	
 	
 	
 	
