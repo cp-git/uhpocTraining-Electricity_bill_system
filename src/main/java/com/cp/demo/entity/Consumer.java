@@ -14,6 +14,21 @@ public class Consumer {
 	
 
 	
+	
+	public Consumer(int consId, String consName, int consNumber, String consAddress1, String consAddress2,
+			String consCity, int consPhone, int deptId) {
+		super();
+		this.consId = consId;
+		this.consName = consName;
+		this.consNumber = consNumber;
+		this.consAddress1 = consAddress1;
+		this.consAddress2 = consAddress2;
+		this.consCity = consCity;
+		this.consPhone = consPhone;
+		this.deptId = deptId;
+	}
+
+
 	public Consumer(int consId, String consName, int consNumber, String consAddress1, String consAddress2,
 			String consCity, int consPhone) {
 		super();
@@ -24,7 +39,7 @@ public class Consumer {
 		this.consAddress2 = consAddress2;
 		this.consCity = consCity;
 		this.consPhone = consPhone;
-		;
+		
 	}
 	
 

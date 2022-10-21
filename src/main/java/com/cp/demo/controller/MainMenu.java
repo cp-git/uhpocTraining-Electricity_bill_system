@@ -239,6 +239,9 @@ public class MainMenu {
 			 consumer=consumerService.getProductById(consId);
 			 
 			 
+			 //listPower = powerService.getBillGeneration(consId);
+			 
+			 
 			 
 			 
 			 
@@ -315,12 +318,21 @@ public class MainMenu {
 				}
 				
 				
+				int powerCmr = 0;
+				Power val=listInvProd.get(powerCmr);
+				System.out.println(val);
+				
 			
-				
-				
-				
-			
-				
+//				for(int i=0;i<listInvProd.size();i++)
+//				{
+//					int val = 0;
+//					for(Power pm:listInvProd)
+//					{
+//						 val=pm.getPowerCmr();
+//					}
+//					System.out.println(val);
+//				}
+//				
 				//System.out.println(listPower.);
 				
 				

@@ -14,7 +14,7 @@ public class PowerServiceImpl implements PowerService {
 	public int createBill(Power power) {
 		int billId=0;
 		try {
-			powerRepo.createpowerbill(power);
+			billId=powerRepo.createpowerbill(power);
 			
 		}
 		catch(Exception ee) {

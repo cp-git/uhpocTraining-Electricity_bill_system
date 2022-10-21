@@ -56,9 +56,10 @@ public class ConsumerRepository {
 	public int getlastConsumerId() throws CPException {
 		int consId=0;
 		String getActiveId="Select max(cons_id) from consumer";
-		con=dbManager.getConnection();
+		
 		
 		try {
+			con=dbManager.getConnection();
 			stmt=con.createStatement();
 			rsobj=stmt.executeQuery(getActiveId);
 			while(rsobj.next()) {
