@@ -15,7 +15,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.cp.demo.dbhelper.DBManager;
+import com.cp.demo.entity.Consumer;
 import com.cp.demo.entity.Power;
+import com.cp.demo.exception.CPException;
 import com.cp.demo.service.PowerService;
 import com.cp.demo.serviceimpl.PowerServiceImpl;
 
@@ -31,6 +33,7 @@ public class testPowerBillRepo {
 	static DBManager dbm = null;
 	static List<Power> powerList= null;
 	Connection con = null;
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -57,12 +60,30 @@ public class testPowerBillRepo {
 	public void tearDown() throws Exception {
 		dbm.closeConnection(con);
 	}
+	
+	
+	@Test
+	public void getlastPowerBillId()
+	{
+		Power power=new Power(226,"09/02/2021",90,"abv",85);
+		try {
+			int LastPowerBillId=powerRepo.getPowerConsumerId();
+			powerList=powerService.getAllPowerDetails();
+			Power cons=powerList.get(powerList.size()-1);
+			assertEquals(cons.getBillId(),LastPowerBillId);
+			
+		} catch (CPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	
 
 	@Test
 	public void testInitializeCallCache() {
-		Power p1 = new Power(128,"09/05/2022",89,"abhi",82);
+		Power p1 = new Power(226,"09/02/2021",90,"abv",85);
 	
 		
 		
@@ -72,7 +93,7 @@ public class testPowerBillRepo {
 		System.out.println(pr);
 		
 		//assertEquals(pr.getPowerCmr(),p1.getPowerCmr());
-		assertEquals(pr.getReaderName(),p1.getReaderName());
+		assertEquals(pr.getBillId(),p1.getBillId());
 	
 		
 		

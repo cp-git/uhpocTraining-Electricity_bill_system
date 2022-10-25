@@ -152,7 +152,7 @@ public class PowerRepo {
 	
 	public List<Power> getListPowerDetails(int consId) {
 		ArrayList<Power> pwarray=new ArrayList<>();
-		String getQuery = "SELECT * FROM power where cons_id = ?";
+		String getQuery = "SELECT * FROM power where cons_id = ? ORDER BY reader_date DESC";
 		Power power=null;
 	
 		try {
@@ -188,6 +188,14 @@ public class PowerRepo {
 		
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

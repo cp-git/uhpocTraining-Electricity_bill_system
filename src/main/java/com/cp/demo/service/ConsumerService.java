@@ -12,6 +12,6 @@ public interface ConsumerService {
 	List<Consumer> getAllConsumer();
 	HashMap<Integer, Consumer> display();
 	
-	public Consumer getProductById(int consId);
+	public Consumer getConsumerById(int consId);
 
 }

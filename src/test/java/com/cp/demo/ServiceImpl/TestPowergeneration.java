@@ -16,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.cp.demo.dbhelper.DBManager;
+import com.cp.demo.entity.Consumer;
 import com.cp.demo.entity.Power;
 import com.cp.demo.repository.PowerRepo;
 import com.cp.demo.service.PowerService;
@@ -25,7 +26,7 @@ public class TestPowergeneration {
 	
 	static PowerRepo powerRepo = null;
 	static PowerService powerService = null;
-	static HashMap<Integer, Power> bCache = null;
+	static HashMap<Integer, Power> bCache ;
 	static DBManager dbm = null;
 	static HashMap<Integer,Power> powerList= null;
 	Connection con = null;
@@ -50,29 +51,40 @@ public class TestPowergeneration {
 	}
 
 	
+	
 	@Test
-	public void testInitializeCallCache() {
-		Power p1 = new Power(128,"09/05/2022",89,"abhi",82);
 	
+	public void testList() {
+		Power expCons = new Power(223, "09/02/2021", 90, "abv", 85);
+
+		List<Power> checkList=new ArrayList<>();
+		checkList = powerService.getAllPowerDetails();
+
+		Power pow = checkList.get(0);
+		assertEquals(expCons.getPowerCmr(),pow.getPowerCmr());
+	//	assertEquals(expCons.getConsCity(), cons.getConsCity());
+
+	}
+	
+	
+	
+	@Test
+	public void testInitializePowerCache() {
 		
-		
-		bCache=powerService.display();
+		Power pwcons = new Power(223, "09/02/2021", 90, "abv", 85);
+
+		HashMap<Integer, Power> bCache = powerService.display();
 		System.out.println(bCache);
-		Power pr=bCache.get("09/05/2022");
-		System.out.println(pr);
-		
-		//assertEquals(pr.getPowerCmr(),p1.getPowerCmr());
-		assertEquals(pr.getReaderName(),p1.getReaderName());
-	
-		
-		
-		
-		
-		
-		
+		Power pwo = bCache.get(223);
+		System.out.println(pwo);
+		assertEquals(pwcons.getBillId(), pwo.getBillId());
+		assertEquals(pwcons.getPowerCmr(), pwo.getPowerCmr());
+
+
 	}
 	@After
 	public void tearDown() throws Exception {
+		dbm.closeConnection(con);
 	}
 
 	

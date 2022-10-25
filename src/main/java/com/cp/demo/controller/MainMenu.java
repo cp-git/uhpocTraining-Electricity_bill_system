@@ -30,6 +30,7 @@ public class MainMenu {
 	private static HashMap<Integer, Consumer> ConsumerCache = new HashMap<>();
 	private static HashMap<Integer, Power> billCache = new HashMap<>();
 
+
 	public MainMenu() {
 //		initCache();
 	}
@@ -44,6 +45,12 @@ public class MainMenu {
 		PowerService pwService=new PowerServiceImpl();
 		billCache=pwService.display();
 	//	System.out.println(billCache);
+		
+		
+	
+		
+		
+	    
 
 	}
 
@@ -155,7 +162,7 @@ public class MainMenu {
 			consId=0;
 			int consNumber=0;
 			List<Power> listInvProd = null;
-			List<Power> listPower=null;
+			int listPower=0;
 			String dateAfter = null;
 			SimpleDateFormat formatter1 = null;
 			Consumer consumer = null;
@@ -236,10 +243,13 @@ public class MainMenu {
 				
 			consumerService=new ConsumerServiceImpl();
 			
-			 consumer=consumerService.getProductById(consId);
+			 consumer=consumerService.getConsumerById(consId);
 			 
 			 
 			 //listPower = powerService.getBillGeneration(consId);
+			 
+			 
+			 
 			 
 			 
 			 
@@ -280,6 +290,7 @@ public class MainMenu {
 				
 				//System.out.println(ConsumerCache.get(consNumber));
 				//System.out.println(listInvProd);
+			//listPower.addAll(listInvProd);
 				
 				System.out.println(consumer.getConsId());
 				System.out.println("Consumer Name        :"+consumer.getConsName());
@@ -310,36 +321,56 @@ public class MainMenu {
 				
 					
 					//System.out.println(dateAfter);
+					//System.out.println(pp.getPowerCmr());
 					
-					
-					
-				
 					
 				}
 				
 				
-				int powerCmr = 0;
-				Power val=listInvProd.get(powerCmr);
-				System.out.println(val);
+				ArrayList<Integer> ademo=new ArrayList<Integer>();
+				for(Power p:listInvProd)
+				{
+					listPower=p.getPowerCmr();
+					//System.out.println(listPower);
+					
+					ademo.add(listPower);
+					
 				
-			
-//				for(int i=0;i<listInvProd.size();i++)
-//				{
-//					int val = 0;
-//					for(Power pm:listInvProd)
-//					{
-//						 val=pm.getPowerCmr();
-//					}
-//					System.out.println(val);
-//				}
-//				
-				//System.out.println(listPower.);
+					
+					
+					
 				
+				}
+				System.out.println(ademo);
 				
 				
-			
+//			for(int i=0;i<ademo.size();i++)
+//			{
+//				int j = i+1;
+//				System.out.println(ademo.get(j)-ademo.get(i));
+//			}
+//			
+			for (int i = 0; i < ademo.size(); i++) {
+				  for (int j =i; j < ademo.size(); j++) {
+				    // compare list.get(i) and list.get(j)
+					  System.out.println(ademo.get(j)-ademo.get(i));
+				  }
+				}
 				
 				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+//				List<Power> demo=powerService.getAllPowerDetails();
+//				System.out.println(demo);
+//				System.out.println(demo.get(2));
 				
 				
 		

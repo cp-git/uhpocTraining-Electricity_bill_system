@@ -44,7 +44,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 		
 	}
 	@Override
-	public Consumer getProductById(int consId) {
+	public Consumer getConsumerById(int consId) {
 		// TODO Auto-generated method stub
 		return consumerRepository.getConsumerById(consId);
 	}

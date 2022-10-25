@@ -1,5 +1,5 @@
 
-package com.cp.demo.repository;
+package com.cp.demo.ServiceImpl;
 
 import static org.junit.Assert.*;
 
@@ -19,13 +19,14 @@ import com.cp.demo.dbhelper.DBManager;
 import com.cp.demo.entity.Consumer;
 import com.cp.demo.entity.Department;
 import com.cp.demo.exception.CPException;
+import com.cp.demo.repository.DepartmentRepository;
 import com.cp.demo.service.DepartmentService;
 import com.cp.demo.serviceimpl.ConsumerServiceImpl;
 import com.cp.demo.serviceimpl.DepartmentServiceImpl;
 
 
 
-public class DepartmentRepo {
+public class DepartmentSImpl {
 	
 	private static DepartmentRepository departmentRepo;
 	private static DepartmentService deptService;
@@ -53,6 +54,18 @@ public class DepartmentRepo {
 	public void setUp() throws Exception {
 		con=dbm.getConnection();
 	}
+	
+	@Test
+	public void testInitializeDepartmentCache() {
+		Department deptCons = new Department(58,"MSEB98","pune","MH");
+
+		HashMap<String, Department> deptCache = deptService.display();
+		Department department = deptCache.get("MSEB");
+		assertEquals(deptCons.getDeptName(), department.getDeptName());
+
+
+	}
+
 
 	@After
 	public void tearDown() throws Exception {
@@ -60,37 +73,10 @@ public class DepartmentRepo {
 	}
 
 	
-	@Test
-	public void getlasDepartmentId()
-	{
-		Department deptCons = new Department(110,"MSEB","Pune","Mh");
-
-		try {
-			int LastDepartmentId=departmentRepo.getLastDeptId();
-			deptList=deptService.getAllDepartment();
-			Department dept=deptList.get(0);
-			assertEquals(dept.getDeptId(),LastDepartmentId);
-			
-		} catch (CPException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	
 	
-	@Test
-	public void testGetDepatmentDetails() {
-		Department deptCons = new Department("MSEB","Pune","Mh");
-
-		deptList = deptService.getAllDepartment();
-
-		Department dept = deptList.get(0);
-		assertEquals(deptCons.getDeptName(), dept.getDeptName());
-		assertEquals(deptCons.getDeptCity(), dept.getDeptCity());
-
-
-	}
+	
+	
 
 	
 	

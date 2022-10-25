@@ -51,7 +51,7 @@ public class TestConsumerServiceImpl {
 	
 	
 	@Test
-	public void testGetCustomerDetails() {
+	public void testGetConsumerDetails() {
 		Consumer expCons = new Consumer(83, "Anmesh", 3598, "solapur", "katraj", "Solapur",673,57);
 
 		conList = consService.getAllConsumer();

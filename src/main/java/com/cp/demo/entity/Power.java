@@ -19,6 +19,41 @@ public class Power {
 	
 	
 	
+	
+
+
+
+
+
+
+	public Power(int billId, int powerCmr, String readerName, int consId) {
+		super();
+		this.billId = billId;
+		this.powerCmr = powerCmr;
+		this.readerName = readerName;
+		this.consId = consId;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	public Power(int powerCmr) {
+		super();
+		this.powerCmr = powerCmr;
+	}
+
+
+
+
+
 
 
 
