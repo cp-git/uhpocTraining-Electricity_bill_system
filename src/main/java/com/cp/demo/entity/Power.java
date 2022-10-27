@@ -1,30 +1,26 @@
 package com.cp.demo.entity;
 
-import java.sql.Date;
-
 public class Power {
-	
+
 	private int billId;
-	private  String readingDate;
+	private String readingDate;
 	private int powerCmr;
+	private int unitConsumed;
 	private String readerName;
 	private int consId;
-	
+
 	public Power() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
-	
 
+	public int getUnitConsumed() {
+		return unitConsumed;
+	}
 
-
-
-
+	public void setUnitConsumed(int unitConsumed) {
+		this.unitConsumed = unitConsumed;
+	}
 
 	public Power(int billId, int powerCmr, String readerName, int consId) {
 		super();
@@ -34,32 +30,21 @@ public class Power {
 		this.consId = consId;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
 	public Power(int powerCmr) {
 		super();
 		this.powerCmr = powerCmr;
 	}
 
-
-
-
-
-
-
-
-
-
-
+	public Power(int billId, String readingDate, int powerCmr, int uc, String readerName, int consId) {
+		super();
+		this.billId = billId;
+		this.readingDate = readingDate;
+		this.powerCmr = powerCmr;
+		this.readerName = readerName;
+		this.unitConsumed = uc;
+		this.consId = consId;
+	}
+	
 	public Power(int billId, String readingDate, int powerCmr, String readerName, int consId) {
 		super();
 		this.billId = billId;
@@ -69,9 +54,6 @@ public class Power {
 		this.consId = consId;
 	}
 
-
-
-
 	public Power(String readingDate, int powerCmr, String readerName, int consId) {
 		super();
 		this.readingDate = readingDate;
@@ -79,27 +61,6 @@ public class Power {
 		this.readerName = readerName;
 		this.consId = consId;
 	}
-
-	
-	
-	
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
 
 	public int getBillId() {
 		return billId;
@@ -146,25 +107,5 @@ public class Power {
 		return "Power [billId=" + billId + ", readingDate=" + readingDate + ", powerCmr=" + powerCmr + ", readerName="
 				+ readerName + ", consId=" + consId + "]";
 	}
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-
-	
-	
-	
 
 }
